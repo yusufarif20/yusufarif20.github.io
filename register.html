@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Pendaftaran - Codeing Class</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Codeing Class</h1>
+            <div class="space-x-4">
+                <a href="#" class="text-white hover:text-blue-200">Home</a>
+                <a href="#" class="text-white hover:text-blue-200">About</a>
+                <a href="#" class="text-white hover:text-blue-200">Contact Us</a>
+                <a href="#" class="text-white hover:text-blue-200">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Pendaftaran -->
+    <section class="flex flex-col items-center py-16">
+        <div class="container max-w-md mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-2">Create New Account</h2>
+            <p class="text-center mb-8">Daftarkan dirimu & lengkapi pengetahuanmu bersama kami.</p>
+
+            <form class="space-y-4">
+                <div class="flex gap-4">
+                    <input type="text" placeholder="Nama Depan" class="w-1/2 p-2 border rounded-md">
+                    <input type="text" placeholder="Nama Belakang" class="w-1/2 p-2 border rounded-md">
+                </div>
+                <input type="text" placeholder="Nomor Telepon" class="w-full p-2 border rounded-md">
+                <input type="email" placeholder="Masukan Email" class="w-full p-2 border rounded-md">
+                <input type="password" placeholder="Password" class="w-full p-2 border rounded-md">
+                <input type="text" placeholder="Kota Domisili" class="w-full p-2 border rounded-md">
+                <input type="text" placeholder="Darimana kamu mengetahui Website ini pertama kali?" class="w-full p-2 border rounded-md">
+
+                <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-800">Daftar</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

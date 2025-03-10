@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #0077b6;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .icon {
+            font-size: 20px;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .section-subtitle {
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        /* Course Cards */
+        .course-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .course-card {
+            background-color: #e6f7ff;
+            border-radius: 10px;
+            overflow: hidden;
+            padding-bottom: 15px;
+        }
+        
+        .course-image {
+            width: 100%;
+            height: 150px;
+            background-color: #0077b6;
+            margin-bottom: 10px;
+        }
+        
+        .course-price {
+            color: #444;
+            margin-bottom: 10px;
+        }
+        
+        .course-desc {
+            padding: 0 10px;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .course-btn {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .see-all-btn {
+            border: 1px solid #0077b6;
+            color: #0077b6;
+            background-color: white;
+            padding: 8px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        /* Advantages Section */
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .advantage-card {
+            background-color: #0077b6;
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            display: flex;
+            gap: 15px;
+            text-align: left;
+        }
+        
+        .advantage-icon {
+            font-size: 30px;
+        }
+        
+        .advantage-text {
+            font-size: 14px;
+        }
+        
+        /* Reviews Section */
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .review-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .reviewer-badge {
+            background-color: #0077b6;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .review-text {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .star-rating {
+            color: #0077b6;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #0077b6;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Codeing Class</h1>
+            <div class="space-x-4">
+                <a href="indexafterlogin.html" class="text-white hover:text-blue-200">Home</a>
+                <a href="#" class="text-white hover:text-blue-200">About</a>
+                <a href="#" class="text-white hover:text-blue-200">Contact Us</a>
+                <a href="#" class="text-white hover:text-blue-200">Login</a>
+                <a href="#" class="bg-white text-blue-600 px-3 py-2 rounded-md hover:bg-blue-200">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Newest Course Section -->
+        <section class="section">
+            <h2 class="section-title">Newest Course</h2>
+            <p class="section-subtitle">Promo bisa berubah setiap saat. Segera dapatkan investasi belajar terbaik kamu hari ini!</p>
+            
+            <div class="course-cards">
+                <!-- Course Card 1 -->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <p class="course-price">Rp 100.000,00</p>
+                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
+                </div>
+                
+                <!-- Course Card 2 -->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <p class="course-price">Rp 100.000,00</p>
+                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
+                </div>
+                
+                <!-- Course Card 3 -->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <p class="course-price">Rp 100.000,00</p>
+                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
+                </div>
+                
+                <!-- Course Card 4 -->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <p class="course-price">Rp 100.000,00</p>
+                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
+                </div>
+            </div>
+            
+            <button class="see-all-btn"onclick="goToProduct()">Lihat Semua Course →</button>
+        </section>
+        
+        <!-- Advantages Section -->
+        <section class="section">
+            <h2 class="section-title">the advantages obtained</h2>
+            <p class="section-subtitle">Apa saja keunggulan yang kamu dapat jika belajar di course ini ?</p>
+            
+            <div class="advantages">
+                <!-- Advantage 1 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon">📊</div>
+                    <div class="advantage-text">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                    </div>
+                </div>
+                
+                <!-- Advantage 2 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon">⏱️</div>
+                    <div class="advantage-text">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                    </div>
+                </div>
+                
+                <!-- Advantage 3 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon">📈</div>
+                    <div class="advantage-text">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Reviews Section -->
+        <section class="section">
+            <h2 class="section-title">Rating and Reviuw</h2>
+            
+            <div class="reviews">
+                <!-- Review Row 1 -->
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review Row 2 -->
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 5 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 6 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review Row 3 -->
+                <!-- Review 7 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 8 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 9 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer content would go here -->
+    </footer>
+    <script>
+        function goToClass() {
+            window.location.href = "class.html"; 
+        }
+        function goToProduct() {
+            window.location.href = "productpage.html"; 
+        }
+        document.getElementById("contactUsBtn").onclick = function() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        // Tutup popup saat tombol 'X' diklik
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+    
+</body>
+</html>

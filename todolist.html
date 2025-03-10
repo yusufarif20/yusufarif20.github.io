@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Firebase</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        input, button, select { padding: 10px; margin: 5px; }
+        ul { list-style-type: none; padding: 0; }
+        li { background: #f4f4f4; padding: 10px; margin: 5px 0; display: flex; justify-content: space-between; align-items: center; }
+        .task-text { flex-grow: 1; cursor: pointer; }
+        .task-buttons { display: flex; gap: 5px; }
+        .edit-form { display: flex; width: 100%; }
+        .edit-input { flex-grow: 1; margin-right: 5px; }
+        nav { background: #333; color: white; padding: 10px; margin-bottom: 20px; }
+        nav a { color: white; margin-right: 15px; text-decoration: none; }
+        nav a:hover { text-decoration: underline; }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Beranda</a>
+        <a href="todolist.html">To-Do List</a>
+        <a href="#">Tentang</a>
+    </nav>
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Tambah tugas...">
+    <select id="taskCategory">
+        <option value="Pekerjaan">Pekerjaan</option>
+        <option value="Pribadi">Pribadi</option>
+        <option value="Lainnya">Lainnya</option>
+    </select>
+    <select id="taskPriority">
+        <option value="Tinggi">Tinggi</option>
+        <option value="Sedang">Sedang</option>
+        <option value="Rendah">Rendah</option>
+    </select>
+    <button onclick="addTask()">Tambah</button>
+
+    <input type="text" id="searchInput" placeholder="Cari tugas..." onkeyup="filterTasks()">
+    <ul id="taskList"></ul>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getDatabase, ref, set, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAwaQ7CiOWKw4NL95HaasYySP9klvni1_0",
+            authDomain: "project-50b5c.firebaseapp.com",
+            databaseURL: "https://project-50b5c-default-rtdb.firebaseio.com",
+            projectId: "project-50b5c",
+            storageBucket: "project-50b5c.firebasestorage.app",
+            messagingSenderId: "482678866962",
+            appId: "1:482678866962:web:83faec39a7b2333da084cb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const tasksRef = ref(database, 'tasks');
+
+        window.addTask = function() {
+            const taskInput = document.getElementById('taskInput').value;
+            const taskCategory = document.getElementById('taskCategory').value;
+            const taskPriority = document.getElementById('taskPriority').value;
+            if (taskInput) {
+                const newTaskRef = push(tasksRef);
+                set(newTaskRef, { text: taskInput, category: taskCategory, priority: taskPriority });
+                document.getElementById('taskInput').value = '';
+            }
+        }
+
+        onValue(tasksRef, (snapshot) => {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+            snapshot.forEach((childSnapshot) => {
+                const taskId = childSnapshot.key;
+                const task = childSnapshot.val();
+                const li = document.createElement('li');
+                li.innerHTML = `<span class='task-text'>${task.text} [${task.category}] (Priority: ${task.priority})</span>`;
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'task-buttons';
+                const editButton = document.createElement('button');
+                editButton.innerText = 'Edit';
+                editButton.onclick = () => startEditTask(li, taskId, task);
+                const deleteButton = document.createElement('button');
+                deleteButton.innerText = 'Delete';
+                deleteButton.onclick = () => deleteTask(taskId);
+                buttonContainer.appendChild(editButton);
+                buttonContainer.appendChild(deleteButton);
+                li.appendChild(buttonContainer);
+                taskList.appendChild(li);
+            });
+        });
+
+        window.startEditTask = function(liElement, taskId, task) {
+            liElement.innerHTML = '';
+            const form = document.createElement('form');
+            form.className = 'edit-form';
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                const newText = editInput.value;
+                const newCategory = categoryInput.value;
+                const newPriority = priorityInput.value;
+                updateTask(taskId, newText, newCategory, newPriority);
+            };
+
+            const editInput = document.createElement('input');
+            editInput.type = 'text';
+            editInput.value = task.text;
+            editInput.className = 'edit-input';
+
+            const categoryInput = document.createElement('input');
+            categoryInput.type = 'text';
+            categoryInput.value = task.category;
+
+            const priorityInput = document.createElement('input');
+            priorityInput.type = 'text';
+            priorityInput.value = task.priority;
+
+            const saveButton = document.createElement('button');
+            saveButton.innerText = 'Simpan';
+            saveButton.type = 'submit';
+
+            const cancelButton = document.createElement('button');
+            cancelButton.innerText = 'Batal';
+            cancelButton.type = 'button';
+            cancelButton.onclick = () => window.location.reload();
+
+            form.append(editInput, categoryInput, priorityInput, saveButton, cancelButton);
+            liElement.appendChild(form);
+        }
+
+        window.updateTask = function(taskId, newText, newCategory, newPriority) {
+            const taskRef = ref(database, 'tasks/' + taskId);
+            update(taskRef, { text: newText, category: newCategory, priority: newPriority });
+        }
+
+        window.deleteTask = function(taskId) {
+            if (confirm('Apakah Anda yakin ingin menghapus tugas ini?')) {
+                remove(ref(database, 'tasks/' + taskId));
+            }
+        }
+    </script>
+</body>
+</html>
