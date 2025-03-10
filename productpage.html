@@ -13,14 +13,27 @@
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-white text-2xl font-bold">Codeing Class</h1>
             <div class="space-x-4">
-                <a href="#" class="text-white hover:text-blue-200">Home</a>
+                <a href="index.html" class="text-white hover:text-blue-200">Home</a>
                 <a href="#" class="text-white hover:text-blue-200">About</a>
-                <a href="#" class="text-white hover:text-blue-200">Contact Us</a>
-                <a href="#" class="text-white hover:text-blue-200">Login</a>
-                <a href="#" class="bg-white text-blue-600 px-3 py-2 rounded-md hover:bg-blue-200">Sign Up</a>
+                <a href="#" id="contactUsBtn" class="text-white hover:text-blue-200">Contact Us</a>
+                <a href="login.html" class="text-white hover:text-blue-200">Login</a>
+                <a href="register.html" class="bg-white text-blue-600 px-3 py-2 rounded-md hover:bg-blue-200">Sign Up</a>
             </div>
         </div>
     </nav>
+
+    <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup()">&times;</button>
+            <p class="contact-text">Contact Us in here</p>
+            <div class="contact-icons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/98/Discord_logo.svg" alt="Discord">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+            </div>
+        </div>
+    </div>
     
     <!-- Main Content -->
     <div class="container">
@@ -178,6 +191,14 @@
     <script>
         function goToClass() {
             window.location.href = "class.html"; 
+        }
+        document.getElementById("contactUsBtn").onclick = function() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        // Tutup popup saat tombol 'X' diklik
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
         }
     </script>
 </body>
