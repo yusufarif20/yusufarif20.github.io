@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Landing Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="mainhomepage">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Codeing Class</h1>
+            <div class="space-x-4">
+                <a href="index.html" class="text-white hover:text-blue-200">Home</a>
+                <a href="#" class="text-white hover:text-blue-200">About</a>
+                <a href="#" id="contactUsBtn" class="text-white hover:text-blue-200">Contact Us</a>
+                <a href="keranjang.html" class="icon-link">
+                    <i class="fas fa-shopping-cart icon"></i>
+                </a>
+                <i class="fas fa-bell icon"></i>
+                <a href="#" class="bg-white font-bold text-blue-600 px-3 py-2 rounded-md hover:bg-blue-200"><i class="fas fa-user"></i> User</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup()">&times;</button>
+            <p class="contact-text">Contact Us in here</p>
+            <div class="contact-icons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/98/Discord_logo.svg" alt="Discord">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Newest Course Section -->
+        <section class="section">
+            <h2 class="section-title">Newest Course</h2>
+            <p class="section-subtitle">Promo bisa berubah setiap saat. Segera dapatkan investasi belajar terbaik kamu hari ini!</p>
+            
+            <div class="course-cards">
+                <!-- Course Card 1 -->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <p class="course-price">Rp 100.000,00</p>
+                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
+                </div>
+                
+                <!-- Course Card 2 -->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <p class="course-price">Rp 100.000,00</p>
+                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
+                </div>
+                
+                <!-- Course Card 3 -->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <p class="course-price">Rp 100.000,00</p>
+                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
+                </div>
+                
+                <!-- Course Card 4 -->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <p class="course-price">Rp 100.000,00</p>
+                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
+                </div>
+            </div>
+            
+            <button class="see-all-btn"onclick="goToProduct()">Lihat Semua Course →</button>
+        </section>
+        
+        <!-- Advantages Section -->
+        <section class="section">
+            <h2 class="section-title">the advantages obtained</h2>
+            <p class="section-subtitle">Apa saja keunggulan yang kamu dapat jika belajar di course ini ?</p>
+            
+            <div class="advantages">
+                <!-- Advantage 1 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon">📊</div>
+                    <div class="advantage-text">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                    </div>
+                </div>
+                
+                <!-- Advantage 2 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon">⏱️</div>
+                    <div class="advantage-text">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                    </div>
+                </div>
+                
+                <!-- Advantage 3 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon">📈</div>
+                    <div class="advantage-text">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Reviews Section -->
+        <section class="section">
+            <h2 class="section-title">Rating and Reviuw</h2>
+            
+            <div class="reviews">
+                <!-- Review Row 1 -->
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review Row 2 -->
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 5 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 6 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review Row 3 -->
+                <!-- Review 7 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 8 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+                
+                <!-- Review 9 -->
+                <div class="review-card">
+                    <div class="reviewer">
+                        <span class="reviewer-badge">User0001</span>
+                    </div>
+                    <p class="review-text">
+                        Is branched in my up strictly remember. Songs but chief has ham widow downs. Genius or so up vanity cannot. Large do tried going about water defer by. Silent son man she wished mother.
+                    </p>
+                    <div class="star-rating">★ ★ ★ ★ ★</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer content would go here -->
+    </footer>
+    <script>
+        function goToClass() {
+            window.location.href = "classafterlogin.html"; 
+        }
+        function goToProduct() {
+            window.location.href = "productpageafterlogin.html"; 
+        }
+        document.getElementById("contactUsBtn").onclick = function() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        // Tutup popup saat tombol 'X' diklik
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+    
+</body>
+</html>

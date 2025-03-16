@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: #0088cc;
+            padding: 15px 0;
+            color: white;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .icons {
+            display: flex;
+            gap: 15px;
+            margin-left: 20px;
+            align-items: center;
+        }
+
+        .icon {
+            color: white;
+            font-size: 20px;
+        }
+
+        .user-button {
+            background-color: white;
+            color: #0088cc;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-left: 15px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Left Column */
+        .left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .checkout-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .address-section, .payment-method-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .country-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .country-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .disclaimer {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .payment-option {
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Right Column */
+        .right-column {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .order-summary {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .order-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .course-card {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .course-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: purple;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .course-details {
+            flex: 1;
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .total-price {
+            background-color: #0088cc;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .payment-summary {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #0088cc;
+            font-weight: 500;
+            color: #0088cc;
+        }
+
+        .terms {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .terms a {
+            color: #0088cc;
+            text-decoration: none;
+        }
+
+        .pay-button {
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: 500;
+            width: 100%;
+            cursor: pointer;
+            text-align: center;
+        }
+        .success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .close-btn {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .success-icon {
+            background-color: #99f5a4;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .checkmark {
+            width: 40px;
+            height: 70px;
+            border-right: 8px solid #4D4D4D;
+            border-bottom: 8px solid #4D4D4D;
+            transform: rotate(45deg);
+            margin-top: -10px;
+        }
+
+        .ok-button {
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 40px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .ok-button:hover {
+            background-color: #006da3;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold"></h1>
+            <div class="space-x-4">
+                <a href="indexafterlogin.html" class="text-white hover:text-blue-200">Home</a>
+                <a href="#" class="text-white hover:text-blue-200">About</a>
+                <a href="#" id="contactUsBtn" class="text-white hover:text-blue-200">Contact Us</a>
+                <a href="keranjang.html" class="icon-link">
+                    <i class="fas fa-shopping-cart icon"></i>
+                </a>
+                <i class="fas fa-bell icon"></i>
+                <a href="#" class="bg-white font-bold text-blue-600 px-3 py-2 rounded-md hover:bg-blue-200"><i class="fas fa-user"></i> User</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-column">
+                <h1 class="checkout-title">CHECKOUT</h1>
+                
+                <!-- Address Section -->
+                <div class="address-section">
+                    <h2 class="section-title">Alamat penagihan</h2>
+                    <label for="country" class="country-label">Negara</label>
+                    <select id="country" class="country-select">
+                        <option>Indonesia</option>
+                    </select>
+                    <p class="disclaimer">digunakan oleh hukum untuk mengolah pajak penjualan yang berlaku untuk pemberian yang diajukan dalam yurisdiksi tersebut.</p>
+                </div>
+                
+                <!-- Payment Method Section -->
+                <div class="payment-method-section">
+                    <h2 class="section-title">Metode Pembayaran</h2>
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            E- Walet
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="payment-option">
+                            Transfer Bank
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h2 class="order-title">Pesanan Anda</h2>
+                    
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="/api/placeholder/120/120" alt="Course Image">
+                        </div>
+                        <div class="course-details">
+                            <h3 class="course-title">Kursus Pemrograman Web:</h3>
+                            <p>Full-Stack Development dengan Next.js & TypeScript</p>
+                        </div>
+                    </div>
+                    
+                    <div class="total-price">
+                        <span>Total</span>
+                        <span>Rp.100.000,00</span>
+                    </div>
+                </div>
+                
+                <!-- Payment Summary -->
+                <div class="payment-summary">
+                    <h2 class="summary-title">Ringkasan Pembayaran</h2>
+                    
+                    <div class="summary-row">
+                        <span>Harga</span>
+                        <span>: Rp.100.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Diskon</span>
+                        <span>: 0%</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Metode pembayaran</span>
+                        <span>: Bank Permata</span>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>Total (1 kursus)</span>
+                        <span>: Rp.105.00</span>
+                    </div>
+                    
+                    <div class="terms">
+                        Dengan menyelesaikan pembelian, Anda menyetujui <a href="#">Persyaratan Penggunaan ini</a>.
+                    </div>
+                    
+                    <button class="pay-button">Bayar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Pelajaran - Codeing Class</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Codeing Class</h1>
+            <div class="space-x-4">
+                <a href="index.html" class="text-white hover:text-blue-200">Home</a>
+                <a href="#" class="text-white hover:text-blue-200">About</a>
+                <a href="#" id="contactUsBtn" class="text-white hover:text-blue-200">Contact Us</a>
+                <a href="keranjang.html" class="icon-link">
+                    <i class="fas fa-shopping-cart icon"></i>
+                </a>
+                <i class="fas fa-bell icon"></i>
+                <a href="#" class="bg-white font-bold text-blue-600 px-3 py-2 rounded-md hover:bg-blue-200"><i class="fas fa-user"></i> User</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup()">&times;</button>
+            <p class="contact-text">Contact Us in here</p>
+            <div class="contact-icons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/98/Discord_logo.svg" alt="Discord">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="container mx-auto p-8 flex">
+        <!-- Sidebar Pelajaran -->
+        <div class="w-1/4 bg-blue-50 p-4 rounded-lg shadow-md">
+            <h2 class="text-lg font-bold mb-4">Pelajaran</h2>
+            <ul class="space-y-2">
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">API Newsapi.Org</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Kotlin Android</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Kotlin Coroutines</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">MVVM (Model-View-ViewModel)</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Repository Pattern</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Retrofit2</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Room Persistence</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Dependency Injection (Koin)</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Infinite Scroll</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">ViewBinding & DataBinding</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Navigation Components</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Glide</a></li>
+                <li><a href="#" class="block p-2 bg-white border rounded-md hover:bg-blue-100">Timber</a></li>
+            </ul>
+            <div class="mt-4">
+                <p class="text-lg font-semibold">Rp.100.000,00</p>
+                <div class="flex space-x-2 mt-2">
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800"onclick="goToCart()">Tambahkan ke keranjang</button>
+                    <button class="border-2 border-blue-600 text-blue-600 px-4 py-2 rounded-md hover:bg-blue-600 hover:text-white">Hubungi Mentor</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Konten Kursus -->
+        <div class="w-3/4 p-4">
+            <div class="bg-blue-200 h-64 rounded-lg mb-4"></div>
+            <h2 class="text-4xl font-bold mb-4">Welcome to Codeing Class</h2>
+            <p class="mb-2 font-semibold">Kursus Diperbarui, Maret 2025</p>
+            <p class="text-lg mb-6">Kursus Pemrograman Web: Full-Stack Development dengan Next.js & TypeScript</p>
+            <p class="text-gray-600 mb-4">Pelajari cara membangun aplikasi web modern dengan arsitektur Full-Stack menggunakan Next.js dan TypeScript...</p>
+            <ul class="list-disc list-inside mb-6">
+                <li>✔️ TypeScript untuk menulis kode yang lebih aman dan terstruktur</li>
+                <li>✔️ Server Components & API Routes untuk backend sederhana di Next.js</li>
+                <li>✔️ React Hooks & Context API untuk manajemen state yang efisien</li>
+                <li>✔️ Tailwind CSS untuk styling yang cepat dan responsif</li>
+                <li>✔️ Prisma ORM untuk pengelolaan database yang modern</li>
+                <li>✔️ Authentication dengan NextAuth.js</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function goToClass() {
+            window.location.href = "class.html"; 
+        }
+        function goToCart() {
+            window.location.href = "keranjang.html"; 
+        }
+        function goToProduct() {
+            window.location.href = "productpage.html"; 
+        }
+        document.getElementById("contactUsBtn").onclick = function() {
+            document.getElementById("popup").style.display = "flex";
+        }
+        // Tutup popup saat tombol 'X' diklik
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+</body>
+</html>

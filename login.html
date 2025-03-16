@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Login</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
 </head>
 <body id="loginpage">
     <div class="login-container">
@@ -13,17 +18,9 @@
             <button class="close-button" onclick="goToHomePage()">×</button>
         </div>
         
-        <form>
-            <input type="email" class="input-field" placeholder="Masukan Email" required>
-            <input type="password" class="input-field" placeholder="Kata Sandi" required>
-            
-            <div class="login-options">
-                <label class="remember-me">
-                    <input type="checkbox"> Ingat Saya
-                </label>
-                <a href="#" class="forgot-password">Lupa Kata Sandi?</a>
-            </div>
-        </form>
+        <form onsubmit="event.preventDefault(); login();">
+            <input type="email" id="email" class="input-field" placeholder="Masukan Email" required>
+            <input type="password" id="password" class="input-field" placeholder="Kata Sandi" required>
         
         <div class="login-divider"></div>
         
@@ -31,7 +28,8 @@
             Belum punya akun? <a href="register.html" class="register-link">Daftar Sekarang!</a>
         </div>
         
-        <button class="login-button"onclick="goToHomePageAfterLogin()">Login</button>
+        <button type="submit" class="login-button">Login</button>
+        </form>
     </div>
     <script>
         function goToHomePage() {

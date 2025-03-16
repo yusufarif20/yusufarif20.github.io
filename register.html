@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Pendaftaran - Codeing Class</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Halaman Pendaftaran - Codeing Class</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        <script src="firebase-config.js"></script>
+        <script src="register.js"></script>
+    </head>
 <body class="bg-white">
     <!-- Navbar -->
     <nav class="bg-blue-600 p-4">
@@ -40,16 +45,16 @@
             <h2 class="text-3xl font-bold text-center mb-2">Create New Account</h2>
             <p class="text-center mb-8">Daftarkan dirimu & lengkapi pengetahuanmu bersama kami.</p>
 
-            <form class="space-y-4">
+            <form id="registerForm" class="space-y-4" onsubmit="event.preventDefault(); register();">
                 <div class="flex gap-4">
-                    <input type="text" placeholder="Nama Depan" class="w-1/2 p-2 border rounded-md">
-                    <input type="text" placeholder="Nama Belakang" class="w-1/2 p-2 border rounded-md">
+                    <input type="text" id="firstName" placeholder="Nama Depan" class="w-1/2 p-2 border rounded-md" required>
+                    <input type="text" id="lastName" placeholder="Nama Belakang" class="w-1/2 p-2 border rounded-md" required>
                 </div>
-                <input type="text" placeholder="Nomor Telepon" class="w-full p-2 border rounded-md">
-                <input type="email" placeholder="Masukan Email" class="w-full p-2 border rounded-md">
-                <input type="password" placeholder="Password" class="w-full p-2 border rounded-md">
-                <input type="text" placeholder="Kota Domisili" class="w-full p-2 border rounded-md">
-                <input type="text" placeholder="Darimana kamu mengetahui Website ini pertama kali?" class="w-full p-2 border rounded-md">
+                <input type="text" id="phone" placeholder="Nomor Telepon" class="w-full p-2 border rounded-md" required>
+                <input type="email" id="email" placeholder="Masukan Email" class="w-full p-2 border rounded-md" required>
+                <input type="password" id="password" placeholder="Password" class="w-full p-2 border rounded-md" required>
+                <input type="text" id="city" placeholder="Kota Domisili" class="w-full p-2 border rounded-md" required>
+                <input type="text" id="referral" placeholder="Darimana kamu mengetahui Website ini pertama kali?" class="w-full p-2 border rounded-md" required>
 
                 <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-800">Daftar</button>
             </form>
@@ -61,7 +66,6 @@
             document.getElementById("popup").style.display = "flex";
         }
 
-        // Tutup popup saat tombol 'X' diklik
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
