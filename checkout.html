@@ -6,6 +6,10 @@
     <title>Checkout Page</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -400,21 +404,64 @@
                     <label for="country" class="country-label">Negara</label>
                     <select id="country" class="country-select">
                         <option>Indonesia</option>
+                        <option>Malaysia</option>
+                        <option>Amerika</option>
+                        <option>Jepang</option>
+                        <option>Rusia</option>
                     </select>
                     <p class="disclaimer">digunakan oleh hukum untuk mengolah pajak penjualan yang berlaku untuk pemberian yang diajukan dalam yurisdiksi tersebut.</p>
                 </div>
                 
                 <!-- Payment Method Section -->
                 <div class="payment-method-section">
-                    <h2 class="section-title">Metode Pembayaran</h2>
+                    <h2 class="section-title">Detail Alamat</h2>
                     <div class="payment-options">
-                        <div class="payment-option">
-                            E- Walet
-                            <i class="fas fa-chevron-down"></i>
+                        <div class="form-group">
+                            <label for="province">Provinsi</label>
+                            <select id="province" class="select-input">
+                                <option value="" selected disabled>Pilih Provinsi</option>
+                                <option value="aceh">Aceh</option>
+                                <option value="sumut">Sumatera Utara</option>
+                                <option value="sumbar">Sumatera Barat</option>
+                                <option value="riau">Riau</option>
+                                <option value="jambi">Jambi</option>
+                                <option value="sumsel">Sumatera Selatan</option>
+                                <option value="bengkulu">Bengkulu</option>
+                                <option value="lampung">Lampung</option>
+                                <option value="babel">Bangka Belitung</option>
+                                <option value="kepri">Kepulauan Riau</option>
+                                <option value="jakarta">DKI Jakarta</option>
+                                <option value="jabar">Jawa Barat</option>
+                                <option value="jateng">Jawa Tengah</option>
+                                <option value="yogya">DI Yogyakarta</option>
+                                <option value="jatim">Jawa Timur</option>
+                                <option value="banten">Banten</option>
+                                <option value="bali">Bali</option>
+                                <option value="ntb">Nusa Tenggara Barat</option>
+                                <option value="ntt">Nusa Tenggara Timur</option>
+                                <option value="kalbar">Kalimantan Barat</option>
+                                <option value="kalteng">Kalimantan Tengah</option>
+                                <option value="kalsel">Kalimantan Selatan</option>
+                                <option value="kaltim">Kalimantan Timur</option>
+                                <option value="kaltara">Kalimantan Utara</option>
+                                <option value="sulut">Sulawesi Utara</option>
+                                <option value="sulteng">Sulawesi Tengah</option>
+                                <option value="sulsel">Sulawesi Selatan</option>
+                                <option value="sultengg">Sulawesi Tenggara</option>
+                                <option value="gorontalo">Gorontalo</option>
+                                <option value="sulbar">Sulawesi Barat</option>
+                                <option value="maluku">Maluku</option>
+                                <option value="malut">Maluku Utara</option>
+                                <option value="papuabarat">Papua Barat</option>
+                                <option value="papua">Papua</option>
+                            </select>
                         </div>
-                        <div class="payment-option">
-                            Transfer Bank
-                            <i class="fas fa-chevron-down"></i>
+                        <div class="form-group">
+                            <label for="city">Kota/Kabupaten</label>
+                            <select id="city" class="select-input">
+                                <option value="" selected disabled>Pilih Kota/Kabupaten</option>
+                                <!-- City options will be populated dynamically based on province selection -->
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -446,17 +493,17 @@
                 <div class="payment-summary">
                     <h2 class="summary-title">Ringkasan Pembayaran</h2>
                     
-                    <div class="summary-row">
+                    <div class="summary-price">
                         <span>Harga</span>
                         <span>: Rp.100.00</span>
                     </div>
                     
-                    <div class="summary-row">
+                    <div class="summary-discount">
                         <span>Diskon</span>
                         <span>: 0%</span>
                     </div>
                     
-                    <div class="summary-row">
+                    <div class="summary-payment">
                         <span>Metode pembayaran</span>
                         <span>: Bank Permata</span>
                     </div>

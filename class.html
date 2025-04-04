@@ -6,6 +6,13 @@
     <title>Halaman Pelajaran - Codeing Class</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script defer src="productpage.js"></script>
+    <script defer src="class.js"></script>
+
 </head>
 <body class="bg-white">
     <!-- Navbar -->
@@ -66,7 +73,9 @@
 
         <!-- Konten Kursus -->
         <div class="w-3/4 p-4">
-            <div class="bg-blue-200 h-64 rounded-lg mb-4"></div>
+            <div id="videoContainer" class="bg-blue-200 h-64 rounded-lg mb-4 flex justify-center items-center">
+                <video id="courseVideo" controls class="w-full h-full hidden"></video>
+            </div>
             <h2 class="text-4xl font-bold mb-4">Welcome to Codeing Class</h2>
             <p class="mb-2 font-semibold">Kursus Diperbarui, Maret 2025</p>
             <p class="text-lg mb-6">Kursus Pemrograman Web: Full-Stack Development dengan Next.js & TypeScript</p>

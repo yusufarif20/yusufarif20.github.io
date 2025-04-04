@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semua Course</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script defer src="productpage.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="productpage">
     <!-- Navbar -->
     <nav class="bg-blue-600 p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-white text-2xl font-bold">Codeing Class</h1>
+            <h1 class="text-white text-2xl font-bold">Coding Class</h1>
             <div class="space-x-4">
                 <a href="index.html" class="text-white hover:text-blue-200">Home</a>
                 <a href="#" class="text-white hover:text-blue-200">About</a>
@@ -22,10 +27,11 @@
         </div>
     </nav>
 
+    <!-- Popup Kontak -->
     <div id="popup" class="popup-overlay">
         <div class="popup-content">
             <button class="close-btn" onclick="closePopup()">&times;</button>
-            <p class="contact-text">Contact Us in here</p>
+            <p class="contact-text">Contact Us</p>
             <div class="contact-icons">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
@@ -35,168 +41,31 @@
         </div>
     </div>
     
-    <!-- Main Content -->
-    <div class="container">
-        <!-- All Courses Section -->
-        <section class="section">
-            <h2 class="section-title">Semua Course</h2>
-            <p class="section-subtitle">Promo bisa berubah setiap saat. Segera dapatkan investasi belajar terbaik kamu hari ini!</p>
-            
-            <!-- Row 1 -->
-            <div class="course-grid">
-                <!-- Course Card 1 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 2 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 3 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 4 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-            </div>
-            
-            <!-- Row 2 -->
-            <div class="course-grid">
-                <!-- Course Card 5 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 6 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 7 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 8 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-            </div>
-            
-            <!-- Row 3 -->
-            <div class="course-grid">
-                <!-- Course Card 9 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 10 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 11 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 12 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-            </div>
-            
-            <!-- Row 4 -->
-            <div class="course-grid">
-                <!-- Course Card 13 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 14 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 15 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-                
-                <!-- Course Card 16 -->
-                <div class="course-card">
-                    <div class="course-image"></div>
-                    <p class="course-price">Rp 100.000,00</p>
-                    <p class="course-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                    <button class="course-btn"onclick="goToClass()">Lihat Course</button>
-                </div>
-            </div>
-        </section>
+    <!-- Section Semua Course -->
+    <div class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold text-center">Semua Course</h2>
+        <p class="text-center text-gray-600">Promo bisa berubah setiap saat. Segera dapatkan investasi belajar terbaik kamu hari ini!</p>
+        
+        <!-- Container untuk menampilkan courses -->
+        <div id="coursesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+            <!-- Data dari Firebase akan di-generate di sini -->
+        </div>
     </div>
     
     <!-- Footer -->
     <footer class="footer">
-        <!-- Footer content would go here -->
+        <!-- Footer content -->
     </footer>
+
     <script>
-        function goToClass() {
-            window.location.href = "class.html"; 
+        function goToClass(courseId) {
+            window.location.href = `class.html?id=${courseId}`;
         }
+
         document.getElementById("contactUsBtn").onclick = function() {
             document.getElementById("popup").style.display = "flex";
         }
 
-        // Tutup popup saat tombol 'X' diklik
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
