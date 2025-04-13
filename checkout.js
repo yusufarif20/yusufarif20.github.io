@@ -93,10 +93,30 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Show success popup after a short delay (simulating payment processing)
     setTimeout(() => {
+      // Ambil data dari localStorage
+      const data = JSON.parse(localStorage.getItem("checkoutData"));
+    
+      // Simpan ke Firebase
+      if (data && data.title && data.description) {
+        // Misal: simpan ke dalam path users/{userId}/checkoutHistory (gunakan user ID yang sesuai)
+        const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : "guest_user";
+    
+        database.ref('users/' + userId + '/checkoutHistory').push({
+          title: data.title,
+          description: data.description,
+          paymentMethod: data.paymentMethod || "Unknown",
+          price: data.price || "Rp.100.000,00",
+          province: data.province || "",
+          city: data.city || "",
+          timestamp: new Date().toISOString()
+        });
+      }
+    
+      // Tampilkan popup
       showSuccessModal();
       payButton.textContent = 'Bayar';
       payButton.disabled = false;
-    }, 1500);
+    }, 1500);    
   });
 
   // Province and City Data

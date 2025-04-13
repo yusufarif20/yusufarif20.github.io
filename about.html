@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Developer Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .team-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .team-intro h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .team-intro p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .member-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .member-info h4 {
+            font-size: 1rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .member-info p {
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.2s ease;
+        }
+        
+        .social-links a:hover {
+            color: #2c3e50;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Meet Our Development Team</h1>
+        <p>The brilliant minds behind our success</p>
+    </header>
+    
+    <div class="container">
+        <div class="team-intro">
+            <h2>About Our Team</h2>
+            <p>Our team consists of passionate developers who bring unique skills and perspectives to every project. With expertise across various technologies and domains, we work together to deliver exceptional software solutions that exceed expectations.</p>
+        </div>
+        
+        <div class="team-grid">
+            <!-- Developer 1 -->
+            <div class="team-member">
+                <img src="member1-img.jpeg" alt="Budi Santoso" class="member-img">
+                <div class="member-info">
+                    <h3>Rafi Putra Bagus Riyadi</h3>
+                    <h4>Lead Full-Stack Developer</h4>
+                    <p>Rafi is our lead developer with over 8 years of experience in web development. He specializes in React, Node.js, and cloud architecture. His problem-solving abilities and technical leadership have been instrumental in our most complex projects.</p>
+                    <div class="social-links">
+                        <a href="#">GitHub</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Developer 2 -->
+            <div class="team-member">
+                <img src="member3-img.jpeg" alt="Siti Rahma" class="member-img">
+                <div class="member-info">
+                    <h3>Ainur Rofiq</h3>
+                    <h4>UI/UX Developer</h4>
+                    <p>Ainur combines artistic vision with technical expertise to create beautiful, intuitive user interfaces. With a background in design and front-end development, she ensures our applications are not only functional but also delightful to use.</p>
+                    <div class="social-links">
+                        <a href="#">GitHub</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Behance</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Developer 3 -->
+            <div class="team-member">
+                <img src="member2-img.jpeg" alt="Arief Wicaksono" class="member-img">
+                <div class="member-info">
+                    <h3>Julio Anggara Putra</h3>
+                    <h4>Mobile Developer</h4>
+                    <p>Julio specializes in cross-platform mobile development using Flutter and React Native. His attention to detail and passion for creating responsive, native-like experiences makes our mobile applications stand out in the market.</p>
+                    <div class="social-links">
+                        <a href="#">GitHub</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Medium</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Developer 4 -->
+            <div class="team-member">
+                <img src="member4-img.jpeg" alt="Dewi Anggraini" class="member-img">
+                <div class="member-info">
+                    <h3>Yusuf Arif Rahman</h3>
+                    <h4>Backend Developer</h4>
+                    <p>Arief is our backend specialist with expertise in database optimization, API development, and server architecture. His focus on performance and security ensures our systems run smoothly even under high load conditions.</p>
+                    <div class="social-links">
+                        <a href="#">GitHub</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Dribbble</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Our Development Team. All rights reserved.</p>
+    </footer>
+</body>
+</html>
