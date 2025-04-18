@@ -102,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : "guest_user";
     
         database.ref('users/' + userId + '/checkoutHistory').push({
+          courseId: data.courseId,
           title: data.title,
           description: data.description,
           paymentMethod: data.paymentMethod || "Unknown",

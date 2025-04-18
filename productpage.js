@@ -1,3 +1,31 @@
+function deleteReview(reviewId) {
+    if (confirm("Yakin ingin menghapus review ini?")) {
+        firebase.database().ref('ratings/' + reviewId).remove()
+        .then(() => {
+            alert("Review berhasil dihapus.");
+            location.reload(); // Atau panggil ulang fetch review
+        }).catch((error) => {
+            console.error("Gagal hapus:", error);
+        });
+    }
+}
+
+function editReview(reviewId, currentComment, currentRating) {
+    const newComment = prompt("Edit komentar:", currentComment);
+    const newRating = prompt("Edit rating (1-5):", currentRating);
+
+    if (newComment !== null && newRating !== null) {
+        firebase.database().ref('ratings/' + reviewId).update({
+            comment: newComment,
+            rating: parseInt(newRating)
+        }).then(() => {
+            alert("Review berhasil diupdate.");
+            location.reload();
+        }).catch((error) => {
+            console.error("Gagal update:", error);
+        });
+    }
+}
 document.addEventListener("DOMContentLoaded", function () {
     if (typeof firebase === "undefined") {
         console.error("Firebase belum dimuat!");
@@ -8,6 +36,55 @@ document.addEventListener("DOMContentLoaded", function () {
     const addToCartButton = document.querySelector('.bg-blue-600.text-white');
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get("id")
+    const reviewsContainer = document.querySelector('.reviews');
+
+    firebase.auth().onAuthStateChanged((currentUser) => {
+        database.ref('ratings').once('value', (snapshot) => {
+            reviewsContainer.innerHTML = '';
+    
+            snapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+                const reviewId = childSnapshot.key;
+                const stars = '★ '.repeat(data.rating).trim();
+                const userId = data.userId;
+                const courseId = data.courseId;
+    
+                // Get User Name
+                database.ref('users/' + userId).once('value', (userSnapshot) => {
+                    const userName = userSnapshot.val()?.name || 'User';
+    
+                    // Get Course Name
+                    database.ref('courses/' + courseId).once('value', (courseSnapshot) => {
+                        const courseName = courseSnapshot.val()?.name || 'Course';
+    
+                        // Tambahkan tombol edit/hapus jika review milik user yang login
+                        const isOwnReview = currentUser && currentUser.uid === userId;
+                        const actionButtons = isOwnReview ? `
+                            <div class="review-actions">
+                                <button onclick="editReview('${reviewId}', '${data.comment}', ${data.rating})" style="background-color: #3b82f6; color: white; border: none; padding: 6px 12px; margin-right: 6px; border-radius: 6px; cursor: pointer;">Edit</button>
+                                <button onclick="deleteReview('${reviewId}')" style="background-color: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer;">Hapus</button>
+                            </div>
+                        ` : '';
+    
+                        const reviewHTML = `
+                            <div class="review-card">
+                                <div class="reviewer">
+                                    <span class="reviewer-badge">${userName}</span>
+                                    <span class="reviewer-badge">${courseName}</span>
+                                </div>
+                                <p class="review-text">${data.comment || '-'}</p>
+                                <div class="star-rating">${stars}</div>
+                                ${actionButtons}
+                            </div>
+                        `;
+    
+                        reviewsContainer.innerHTML += reviewHTML;
+                    });
+                });
+            });
+        });
+    });
+    
 
     if (addToCartButton) {
         addToCartButton.addEventListener('click', function() {

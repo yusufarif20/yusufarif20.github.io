@@ -95,6 +95,7 @@ function loadCartFromFirebase(userId, cartContainer, cartCount) {
 
             // Event listener untuk tombol Checkout
             courseItem.querySelector(".checkout-btn").addEventListener("click", function () {
+                item.courseId = itemKey;
                 checkoutItem(item);
             });
         });
@@ -121,17 +122,20 @@ function updateCartCount(count, cartCountElement) {
 }
 
 function checkoutItem(item) {
+    console.log("Item yang dikirim ke checkoutItem:", item)
+    
     const checkoutData = {
+        courseId: item.courseId || "", 
         title: item.title,
         description: item.description || 'Deskripsi tidak tersedia',
         price: item.price,
         image: item.thumbnail || 'course-image.jpg',
-        paymentMethod : item.paymentMethod
+        paymentMethod: item.paymentMethod || 'Belum dipilih'
     };
 
     localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
     
-    // Redirect to checkout page
+    // Redirect ke halaman checkout
     window.location.href = "checkout.html";
 }
 
