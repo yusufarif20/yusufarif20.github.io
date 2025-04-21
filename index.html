@@ -44,7 +44,7 @@
                 <p class="text-lg mb-6">Jadi Programmer dengan Koneksi dan Peluang Karier Seumur Hidup</p>
                 <p class="text-gray-600 mb-4">Startup inovatif dengan solusi terdepan, berkembang pesat sejak awal dengan dukungan berkelanjutan seumur hidup.</p>
                 <div class="space-x-4">
-                    <button id="contactUsBtn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800">Hubungi kami</button>
+                    <button id="contactUsBtn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800"onclick="goToChat()">Hubungi kami</button>
                     <button class="border-2 border-blue-600 text-blue-600 px-4 py-2 rounded-md hover:bg-blue-600 hover:text-white"onclick="goToHome()">Lihat Course</button>
                 </div>
             </div>
@@ -56,6 +56,9 @@
     <script>
         function goToHome() {
             window.location.href = "mainhomepage.html"; 
+        }
+        function goToChat() {
+            window.location.href = "chatbot.html"; 
         }
         document.getElementById("contactUsBtn").onclick = function() {
             document.getElementById("popup").style.display = "flex";
