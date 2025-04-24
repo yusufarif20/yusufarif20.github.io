@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const database = firebase.database(); // Inisialisasi database
     const addToCartButton = document.querySelector('.bg-blue-600.text-white');
+    const guestButton = document.getElementById('guest');
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get("id")
     const reviewsContainer = document.querySelector('.reviews');
@@ -84,8 +85,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
-    
 
+    if (guestButton) {
+        guestButton.addEventListener('click', function () {
+            // Langsung arahkan ke halaman registrasi
+            window.location.href = "register.html";
+        });
+    }
+    
     if (addToCartButton) {
         addToCartButton.addEventListener('click', function() {
             // Fetch course data from Firebase first
