@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     const database = firebase.database(); // Inisialisasi database
-    const addToCartButton = document.querySelector('.bg-blue-600.text-white');
+    const userButton = document.getElementById('addToCart-user');
     const guestButton = document.getElementById('guest');
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get("id")
@@ -92,9 +92,9 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "register.html";
         });
     }
-    
-    if (addToCartButton) {
-        addToCartButton.addEventListener('click', function() {
+
+    if (userButton) {
+        userButton.addEventListener('click', function() {
             // Fetch course data from Firebase first
             if (courseId) {
                 const courseRef = database.ref('courses/' + courseId);
