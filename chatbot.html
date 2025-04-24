@@ -2,157 +2,50 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Chat dengan Admin</title>
-  <style>
-    /* CSS dari sebelumnya (boleh kamu pakai ulang) */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f3f4f6;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    .chat-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      max-width: 600px;
-      margin: auto;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .chat-header {
-      background-color: #1e40af;
-      color: #fff;
-      padding: 15px;
-      text-align: center;
-      font-size: 18px;
-    }
-
-    .chat-body {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-    }
-
-    .message {
-      margin: 10px 0;
-      max-width: 70%;
-      padding: 10px;
-      border-radius: 10px;
-      clear: both;
-    }
-
-    .user-message {
-      background-color: #e5e7eb;
-      float: right;
-    }
-
-    .admin-message {
-      background-color: #dbeafe;
-      float: left;
-    }
-
-    .chat-footer {
-      display: flex;
-      padding: 10px;
-      border-top: 1px solid #ccc;
-      background-color: #f9fafb;
-    }
-
-    .chat-footer input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-    }
-
-    .chat-footer button {
-      margin-left: 10px;
-      padding: 10px 15px;
-      background-color: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .chat-footer button:hover {
-      background-color: #1d4ed8;
-    }
-  </style>
+  <title>Chatbot AI</title>
+  <link rel="stylesheet" href="stylechatbot.css">
 </head>
 <body>
-
-<div class="chat-container">
-  <div class="chat-header">
-    Chat dengan Admin
+  <div class="chat-container">
+    <h2>Chatbot AI</h2>
+    <div id="chat-box" class="chat-box"></div>
+    <div class="input-group">
+      <input type="text" id="user-input" placeholder="Ketik pesan..." />
+      <button onclick="sendMessage()">Kirim</button>
+    </div>
   </div>
-  <div class="chat-body" id="chatBody">
-    <!-- Chat akan ditampilkan di sini -->
-  </div>
-  <div class="chat-footer">
-    <input type="text" id="chatInput" placeholder="Ketik pesan...">
-    <button onclick="kirimPesan()">Kirim</button>
-  </div>
-</div>
 
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("user-input");
+      const message = input.value;
+      if (!message.trim()) return;
 
-<!-- Firebase config kamu (pastikan file ini sudah ada dan dikonfigurasi) -->
-<script src="firebase-config.js"></script>
+      addMessage("user", message);
+      input.value = "";
 
-<script>
-  const db = firebase.database();
-  const chatBody = document.getElementById('chatBody');
+      try {
+        const response = await fetch("https://chatbot-app.render.com/chat", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ message })
+        });
 
-  function kirimPesan() {
-    const input = document.getElementById('chatInput');
-    const pesan = input.value.trim();
-
-    if (pesan === '') return;
-
-    // Simpan ke Firebase Realtime Database
-    const chatRef = db.ref('chats'); // root node: /chats
-
-    const data = {
-      sender: 'user', // bisa 'admin' kalau kamu ganti role
-      message: pesan,
-      timestamp: Date.now()
-    };
-
-    chatRef.push(data);
-
-    input.value = '';
-  }
-
-  // Ambil data secara real-time dari Firebase
-  const chatRef = db.ref('chats');
-  chatRef.on('child_added', function(snapshot) {
-    const data = snapshot.val();
-    const msgDiv = document.createElement('div');
-    msgDiv.classList.add('message');
-
-    if (data.sender === 'user') {
-      msgDiv.classList.add('user-message');
-    } else {
-      msgDiv.classList.add('admin-message');
+        const data = await response.json();
+        addMessage("bot", data.response);
+      } catch (error) {
+        addMessage("bot", "Gagal terhubung ke server.");
+      }
     }
 
-    msgDiv.textContent = data.message;
-    chatBody.appendChild(msgDiv);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  });
-</script>
-
+    function addMessage(sender, text) {
+      const chatBox = document.getElementById("chat-box");
+      const messageElem = document.createElement("div");
+      messageElem.className = `message ${sender}`;
+      messageElem.textContent = text;
+      chatBox.appendChild(messageElem);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
 </body>
 </html>
