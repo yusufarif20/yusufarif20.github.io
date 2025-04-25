@@ -93,9 +93,10 @@
           dbRef.once("value").then((snapshot) => {
             if (snapshot.exists()) {
               const data = snapshot.val();
-              document.getElementById("firstName").value = data.firstName || "";
-              document.getElementById("lastName").value = data.lastName || "";
-              document.getElementById("headline").value = data.referral || "";
+              const updatedFirstName = document.getElementById("firstName").value;
+              const updatedLastName = document.getElementById("lastName").value;
+              const updatedHeadline = document.getElementById("headline").value;
+              const updatedBiography = document.getElementById("biography").value;
             }
           });
   
@@ -107,12 +108,19 @@
             const updatedFirstName = document.getElementById("firstName").value;
             const updatedLastName = document.getElementById("lastName").value;
             const updatedHeadline = document.getElementById("headline").value;
+            const updatedBiography = document.getElementById("biography").value;
+
+            if (updatedBiography.trim().split(/\s+/).length < 50) {
+              alert("Biografi harus minimal 50 kata.");
+              return;
+            }
   
             // Update ke Firebase
             dbRef.update({
               firstName: updatedFirstName,
               lastName: updatedLastName,
-              referral: updatedHeadline
+              referral: updatedHeadline,
+              biography: updatedBiography
             }).then(() => {
               alert("Data berhasil diperbarui!");
             }).catch((error) => {
