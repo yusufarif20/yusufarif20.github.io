@@ -59,17 +59,79 @@
       </div>
 
       <!-- Upload Form -->
-      <form class="space-y-4">
+      <form id="profile-form" class="space-y-4">
         <div class="flex items-center justify-center gap-2">
-          <input type="file" id="fileInput" class="border rounded px-2 py-1 w-64 text-sm">
-          <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Unggah Gambar</button>
+          <input type="file" id="fileInput" class="border rounded px-2 py-1 w-64 text-sm" accept="image/*">
+          <button type="button" id="uploadButton" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Unggah Gambar</button>
         </div>
-
+        <img id="previewImage" class="mx-auto rounded-full w-32 h-32 object-cover" style="display:none;" />
         <button type="submit" class="w-full bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Simpan</button>
       </form>
     </div>
   </main>
-
-
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const fileInput = document.getElementById("fileInput");
+      const uploadButton = document.getElementById("uploadButton");
+      const previewImage = document.getElementById("previewImage");
+      const profileForm = document.getElementById("profile-form");
+  
+      let uploadedImageUrl = "";
+  
+      uploadButton.addEventListener("click", async () => {
+        const file = fileInput.files[0];
+        if (!file) {
+          alert("Pilih gambar terlebih dahulu!");
+          return;
+        }
+  
+        try {
+          const imageUrl = await uploadToCloudinary(file);
+          uploadedImageUrl = imageUrl;
+          previewImage.src = imageUrl;
+          previewImage.style.display = "block";
+          alert("Gambar berhasil diunggah!");
+        } catch (err) {
+          console.error("Upload gagal:", err);
+          alert("Terjadi kesalahan saat upload gambar.");
+        }
+      });
+  
+      profileForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!uploadedImageUrl) {
+          alert("Silakan unggah gambar terlebih dahulu.");
+          return;
+        }
+  
+        const user = firebase.auth().currentUser;
+        if (!user) {
+          alert("User belum login.");
+          return;
+        }
+  
+        const userRef = firebase.database().ref("users/" + user.uid);
+        await userRef.update({ profilePicture: uploadedImageUrl });
+  
+        alert("Foto profil berhasil disimpan!");
+      });
+  
+      // Fungsi Upload ke Cloudinary
+      async function uploadToCloudinary(file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "my_preset"); // Ganti sesuai Cloudinary preset kamu
+        formData.append("cloud_name", "ddu9nn95b"); // Ganti dengan cloud name kamu
+  
+        const response = await fetch(`https://api.cloudinary.com/v1_1/ddu9nn95b/image/upload`, {
+          method: "POST",
+          body: formData
+        });
+  
+        const data = await response.json();
+        return data.secure_url;
+      }
+    });
+  </script>  
 </body>
 </html>
