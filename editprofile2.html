@@ -50,12 +50,8 @@
       <p class="text-sm text-gray-500 mb-4">Minimum 200×200 piksel, Maksimum 6000×6000 piksel</p>
 
       <!-- Preview Box -->
-      <div class="border rounded-md h-56 mb-4 flex items-center justify-center">
-        <!-- Dummy Avatar Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 14c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4zm0-2a4 4 0 100-8 4 4 0 000 8z" />
-        </svg>
+      <div id="avatarPreview" class="border rounded-md h-56 mb-4 flex items-center justify-center">
+        <img id="previewImage" class="h-full object-contain" style="display: none;" />
       </div>
 
       <!-- Upload Form -->
@@ -64,7 +60,6 @@
           <input type="file" id="fileInput" class="border rounded px-2 py-1 w-64 text-sm" accept="image/*">
           <button type="button" id="uploadButton" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Unggah Gambar</button>
         </div>
-        <img id="previewImage" class="mx-auto rounded-full w-32 h-32 object-cover" style="display:none;" />
         <button type="submit" class="w-full bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Simpan</button>
       </form>
     </div>
@@ -77,6 +72,23 @@
       const profileForm = document.getElementById("profile-form");
   
       let uploadedImageUrl = "";
+
+      // Ambil foto profil dari Firebase dan tampilkan
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          const userRef = firebase.database().ref("users/" + user.uid);
+          userRef.once("value").then((snapshot) => {
+            const data = snapshot.val();
+            const profilePicUrl = data?.profilePicture;
+
+            if (profilePicUrl) {
+              const previewImage = document.getElementById("previewImage");
+              previewImage.src = profilePicUrl;
+              previewImage.style.display = "block";
+            }
+          });
+        }
+      });
   
       uploadButton.addEventListener("click", async () => {
         const file = fileInput.files[0];
@@ -88,6 +100,9 @@
         try {
           const imageUrl = await uploadToCloudinary(file);
           uploadedImageUrl = imageUrl;
+          const previewContainer = document.getElementById("avatarPreview");
+          const previewImage = document.getElementById("previewImage");
+
           previewImage.src = imageUrl;
           previewImage.style.display = "block";
           alert("Gambar berhasil diunggah!");

@@ -150,35 +150,96 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function fetchCourses() {
+    document.getElementById('searchInput').addEventListener('input', function() {
+        filterAndSortCourses();
+    });
+    
+    // Tambahkan event listener untuk sort select
+    document.getElementById('sortSelect').addEventListener('change', function() {
+        filterAndSortCourses();
+    });
+
+    function filterAndSortCourses() {
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
         const coursesContainer = document.getElementById('coursesContainer');
         
         // Cek apakah elemen ditemukan sebelum mengaksesnya
-        if (!coursesContainer) {
-            console.warn("Elemen coursesContainer tidak ditemukan. Fungsi fetchCourses() tidak dijalankan.");
+        if (!coursesContainer || !searchInput || !sortSelect) {
+            console.warn("Salah satu elemen tidak ditemukan. Fungsi tidak dijalankan.");
             return;
         }
-
+    
+        const searchTerm = searchInput.value.toLowerCase();
+        const sortType = sortSelect.value;
+        
         coursesContainer.innerHTML = ''; // Kosongkan sebelum memuat data baru
         const coursesRef = database.ref('courses');
-
+    
         coursesRef.once('value', (snapshot) => {
+            let coursesArray = [];
+            
+            // Ubah snapshot ke array untuk memudahkan sorting
             snapshot.forEach((childSnapshot) => {
                 const course = childSnapshot.val();
+                course.key = childSnapshot.key;
                 
+                // Filter berdasarkan kata kunci pencarian
+                if (searchTerm === '' || 
+                    course.description.toLowerCase().includes(searchTerm) || 
+                    (course.title && course.title.toLowerCase().includes(searchTerm))) {
+                    coursesArray.push(course);
+                }
+            });
+            
+            // Urutkan array sesuai opsi yang dipilih
+            switch(sortType) {
+                case 'az':
+                    coursesArray.sort((a, b) => (a.title || a.description).localeCompare(b.title || b.description));
+                    break;
+                case 'za':
+                    coursesArray.sort((a, b) => (b.title || b.description).localeCompare(a.title || a.description));
+                    break;
+                case 'lowPrice':
+                    coursesArray.sort((a, b) => {
+                        const priceA = parseInt(a.price.replace(/\D/g, '')) || 0;
+                        const priceB = parseInt(b.price.replace(/\D/g, '')) || 0;
+                        return priceA - priceB;
+                    });
+                    break;
+                case 'highPrice':
+                    coursesArray.sort((a, b) => {
+                        const priceA = parseInt(a.price.replace(/\D/g, '')) || 0;
+                        const priceB = parseInt(b.price.replace(/\D/g, '')) || 0;
+                        return priceB - priceA;
+                    });
+                    break;
+            }
+            
+            // Tampilkan kursus yang telah difilter dan diurutkan
+            coursesArray.forEach((course) => {
                 const courseCard = document.createElement('div');
                 courseCard.classList.add('course-card');
-
+    
                 courseCard.innerHTML = `
                     <div class="course-image" style="background-image: url('${course.thumbnailUrl}'); background-size: cover; height: 150px;"></div>
                     <p class="course-price">${course.price}</p>
                     <p class="course-desc">${course.description}</p>
-                    <button class="course-btn" onclick="goToClass('${childSnapshot.key}')">Lihat Course</button>
+                    <button class="course-btn" onclick="goToClass('${course.key}')">Lihat Course</button>
                 `;
-
+    
                 coursesContainer.appendChild(courseCard);
             });
+            
+            // Tambahkan pesan jika tidak ada kursus yang ditemukan
+            if (coursesArray.length === 0) {
+                coursesContainer.innerHTML = '<p class="text-center w-full py-4">Tidak ada course yang ditemukan</p>';
+            }
         });
+    }
+
+    function fetchCourses() {
+        filterAndSortCourses();
     }
 
     function goToClass(courseId) {

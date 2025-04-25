@@ -87,15 +87,17 @@
   
           // Ambil data awal untuk diisi ke form
           dbRef.once("value").then((snapshot) => {
-            if (snapshot.exists()) {
-              const data = snapshot.val();
-              const updatedFirstName = document.getElementById("firstName").value;
-              const updatedLastName = document.getElementById("lastName").value;
-              const updatedHeadline = document.getElementById("headline").value;
-              const updatedBiography = document.getElementById("biography").value;
-            }
-          });
-  
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            // Tampilkan data ke dalam input form
+            document.getElementById("firstName").value = data.firstName || "";
+            document.getElementById("lastName").value = data.lastName || "";
+            document.getElementById("headline").value = data.referral || "";
+            document.getElementById("biography").value = data.biography || "";
+          }
+        });
+          
           // Saat tombol simpan diklik
           form.addEventListener("submit", (e) => {
             e.preventDefault(); // Hindari reload
