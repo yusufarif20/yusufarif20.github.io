@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Video Pembelajaran</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: white;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #0077b6;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-container {
+            flex: 0 1 600px;
+            display: flex;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            border-radius: 2px 0 0 2px;
+            outline: none;
+        }
+
+        .search-button {
+            padding: 8px 16px;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            border-left: none;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+        }
+
+        .main-container {
+            max-width: 1280px;
+            margin: 24px auto;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: black;
+            position: relative;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .video-info {
+            padding: 16px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .video-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .video-stats {
+            display: flex;
+            align-items: center;
+            color: #606060;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .video-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .action-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #606060;
+            font-size: 14px;
+            padding: 8px;
+            border-radius: 18px;
+        }
+
+        .action-button:hover {
+            background-color: #f2f2f2;
+        }
+
+        .content-description {
+            padding: 16px 0;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+
+        .description-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .description-content {
+            color: #606060;
+            line-height: 1.5;
+        }
+
+        .related-videos {
+            margin-top: 24px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .related-videos-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .related-video-item {
+            cursor: pointer;
+        }
+
+        .related-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .related-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .related-channel {
+            font-size: 12px;
+            color: #606060;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 0 12px;
+            }
+            
+            .video-title {
+                font-size: 18px;
+            }
+            
+            .related-videos-list {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Codeing</div>
+    </header>
+
+    <div class="main-container">
+        <div class="video-container">
+            <video controls poster="/api/placeholder/1280/720">
+                <source src="#" type="video/mp4">
+                Maaf, browser Anda tidak mendukung pemutaran video.
+            </video>
+        </div>
+
+        <div class="video-info">
+            <h1 class="video-title">Judul Video Pembelajaran</h1>
+            <div class="video-stats">
+                1.234 kali ditonton • 2 hari yang lalu
+            </div>
+            <div class="video-actions">
+                <button class="action-button">👍 Suka</button>
+                <button class="action-button">👎 Tidak Suka</button>
+                <button class="action-button">📤 Bagikan</button>
+                <button class="action-button">📑 Simpan</button>
+            </div>
+        </div>
+
+        <div class="content-description">
+            <div class="description-title">Deskripsi</div>
+            <div class="description-content">
+                <p>Ini adalah deskripsi video pembelajaran. Di sini bisa berisi penjelasan tentang materi yang dibahas dalam video, referensi tambahan, atau informasi penting lainnya.</p>
+                <p>Anda juga bisa mencantumkan link ke materi pendukung atau video-video terkait untuk dipelajari lebih lanjut.</p>
+            </div>
+        </div>
+
+    </div>
+    <script>
+    function getCourseIdFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('courseId'); // contoh: ?id=-OM-JmCad0UymRyrv2nE
+    }
+
+    const courseId = getCourseIdFromURL();
+
+    if (courseId) {
+        const courseRef = firebase.database().ref("courses/" + courseId);
+
+        courseRef.once("value")
+            .then((snapshot) => {
+                const courseData = snapshot.val();
+                if (courseData) {
+                    const description = courseData.description || "Deskripsi tidak tersedia.";
+
+                    // Update isi HTML deskripsi
+                    document.querySelector(".description-content").innerHTML = `<p>${description}</p>`;
+                } else {
+                    console.error("Course tidak ditemukan");
+                }
+            })
+            .catch((error) => {
+                console.error("Gagal mengambil data course:", error);
+            });
+    } else {
+        console.error("CourseId tidak ditemukan di URL");
+    }
+
+    function loadVideo() {
+        const courseId = getCourseIdFromURL();
+        if (!courseId) {
+            alert('ID Course tidak ditemukan di URL.');
+            return;
+        }
+
+        const courseRef = database.ref('courses/' + courseId);
+        courseRef.once('value').then(snapshot => {
+            if (snapshot.exists()) {
+                const videoUrl = snapshot.val().videoCoreUrl;
+                document.querySelector('.video-container video source').src = videoUrl;
+                document.querySelector('.video-container video').load();
+            } else {
+                alert('Course tidak ditemukan.');
+            }
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
+    window.onload = loadVideo;
+    </script>
+</body>
+</html>

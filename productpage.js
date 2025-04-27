@@ -164,7 +164,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const sortSelect = document.getElementById('sortSelect');
         const coursesContainer = document.getElementById('coursesContainer');
         
-        // Cek apakah elemen ditemukan sebelum mengaksesnya
         if (!coursesContainer || !searchInput || !sortSelect) {
             console.warn("Salah satu elemen tidak ditemukan. Fungsi tidak dijalankan.");
             return;
@@ -173,18 +172,30 @@ document.addEventListener("DOMContentLoaded", function () {
         const searchTerm = searchInput.value.toLowerCase();
         const sortType = sortSelect.value;
         
-        coursesContainer.innerHTML = ''; // Kosongkan sebelum memuat data baru
+        coursesContainer.innerHTML = ''; 
         const coursesRef = database.ref('courses');
+    
+        // DETEKSI halaman
+        const currentPage = window.location.pathname.split('/').pop(); // ambil nama file HTML
+        let maxItems = null; // default tampil semua
+    
+        if (currentPage === 'mainhomepageafterlogin.html') {
+            maxItems = 4; // Kalau di menu utama, maksimal 4 course
+        } else if (currentPage === 'productpageafterlogin.html') {
+            maxItems = null; // Kalau di halaman product, tampil semua course
+        } else if (currentPage === 'mainhomepage.html') {
+            maxItems = 4; // Kalau di menu utama, maksimal 4 course
+        } else if (currentPage === 'productpage.html') {
+            maxItems = null; // Kalau di halaman product, tampil semua course
+        }
     
         coursesRef.once('value', (snapshot) => {
             let coursesArray = [];
             
-            // Ubah snapshot ke array untuk memudahkan sorting
             snapshot.forEach((childSnapshot) => {
                 const course = childSnapshot.val();
                 course.key = childSnapshot.key;
                 
-                // Filter berdasarkan kata kunci pencarian
                 if (searchTerm === '' || 
                     course.description.toLowerCase().includes(searchTerm) || 
                     (course.title && course.title.toLowerCase().includes(searchTerm))) {
@@ -192,7 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
             
-            // Urutkan array sesuai opsi yang dipilih
             switch(sortType) {
                 case 'az':
                     coursesArray.sort((a, b) => (a.title || a.description).localeCompare(b.title || b.description));
@@ -216,7 +226,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
             }
             
-            // Tampilkan kursus yang telah difilter dan diurutkan
+            if (maxItems !== null) {
+                coursesArray = coursesArray.slice(0, maxItems);
+            }
+    
             coursesArray.forEach((course) => {
                 const courseCard = document.createElement('div');
                 courseCard.classList.add('course-card');
@@ -231,12 +244,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 coursesContainer.appendChild(courseCard);
             });
             
-            // Tambahkan pesan jika tidak ada kursus yang ditemukan
             if (coursesArray.length === 0) {
                 coursesContainer.innerHTML = '<p class="text-center w-full py-4">Tidak ada course yang ditemukan</p>';
             }
         });
-    }
+    }    
 
     function fetchCourses() {
         filterAndSortCourses();
