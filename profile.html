@@ -193,6 +193,11 @@
                 onclick="openRatingModal('${courseId}')">
                 Beri Rating
             </button>
+            <button 
+                class="mt-3 bg-red-400 hover:bg-red-500 text-white font-semibold py-1 px-3 rounded" 
+                onclick="hapusCourse('${courseId}')">
+                Hapus
+            </button>
           `;
 
           gridContainer.appendChild(card);
@@ -209,7 +214,34 @@
         // Bisa redirect ke login page di sini kalau mau
     }
     });
-  </script>
 
+    function hapusCourse(courseId) {
+      const user = firebase.auth().currentUser;
+      if (!user) return alert("Anda belum login.");
+
+      if (!confirm("Apakah Anda yakin ingin menghapus course ini?")) return;
+
+      const userRef = firebase.database().ref("users/" + user.uid + "/checkoutHistory");
+
+      userRef.once("value", (snapshot) => {
+        const history = snapshot.val();
+        const keyToDelete = Object.keys(history || {}).find(key => history[key].courseId === courseId);
+
+        if (keyToDelete) {
+          firebase.database().ref(`users/${user.uid}/checkoutHistory/${keyToDelete}`).remove()
+            .then(() => {
+              alert("Course berhasil dihapus.");
+              location.reload(); // reload untuk merefresh tampilan
+            })
+            .catch(err => {
+              console.error("Gagal menghapus course:", err);
+              alert("Terjadi kesalahan saat menghapus course.");
+            });
+        } else {
+          alert("Course tidak ditemukan.");
+        }
+      });
+    }
+</script>
 </body>
 </html>
